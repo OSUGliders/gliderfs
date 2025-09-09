@@ -19,6 +19,6 @@ cd dbd2netcdf
 cmake .
 make
 make check
-make install
+sudo make install  # otherwise permission denied... 
 ```
 
