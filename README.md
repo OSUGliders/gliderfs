@@ -1,0 +1,2 @@
+# gliderfs
+File server configuration
