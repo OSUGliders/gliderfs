@@ -12,7 +12,7 @@ Install some packages that we need to get [dbd2netcdf](https://github.com/OSUGli
 
 ```
 cd ~
-sudo apt install cmake libnetcdf-dev libhdf5-dev build-essential
+sudo apt install cmake libnetcdf-dev libhdf5-dev build-essential netcdf-bin
 git clone https://github.com/OSUGliders/dbd2netcdf
 cd dbd2netcdf
 # follow the instructions in INSTALL, which were
@@ -22,3 +22,4 @@ make check
 sudo make install  # otherwise permission denied... 
 ```
 
+This threw some errors for me on make check and the last part of make install, but does appear to have installed successfully. 
