@@ -23,3 +23,13 @@ sudo make install  # otherwise permission denied...
 ```
 
 This threw some errors for me on make check and the last part of make install, but does appear to have installed successfully. 
+
+Now lets try and install `glide`.
+
+```
+sudo apt install pipx
+pipx ensurepath  # strictly only sures local path, doesn't help for global installs
+
+```
+
+I ran into problems here: https://github.com/pypa/pipx/issues/1481
