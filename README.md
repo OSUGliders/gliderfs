@@ -34,6 +34,11 @@ This threw some errors for me on make check and the last part of make install, b
 
 Now lets try and install `glide` with `pipx`. In future versions of of Ubuntu (26.04), this should be much easier. Unfortunately 24.04 only includes pipx version 1.4 which doesn't allow for global installations of packages. To get around this I dug up this comment in an GitHub issue: https://github.com/pypa/pipx/issues/1481#issuecomment-2593233084. Yes, someone backported pipx 1.6 to Ubuntu 24.04. It seems to work.
 
+```
+wget https://github.com/zinc75/pipx-1.6.0-backport-ubuntu-2404-lts/releases/download/1.6.0-1/pipx_1.6.0-1_all.deb
+sudo dpkg -i pipx_1.6.0-1_all.deb
+```
+
 With `pipx` installed, run
 
 ```
