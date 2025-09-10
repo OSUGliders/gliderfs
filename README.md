@@ -22,6 +22,8 @@ ln -s /home/server/hpc/grg ~/grg
 
 ## Initial setup
 
+**Only one person needs to do this for the packages to be globally available. As of 9/10/25 this has already been done.**
+
 Install some packages that we need to get [dbd2netcdf](https://github.com/OSUGliders/dbd2netcdf) running
 
 ```
