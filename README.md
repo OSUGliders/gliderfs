@@ -14,6 +14,12 @@ Log in via ssh while on the OSU network.
 ssh [YOUR_ONID]@gliderfs3.ceoas.oregonstate.edu
 ```
 
+Once logged in, our group storage is located at `/home/server/hpc/grg/`. For convenience, create a soft link of this directory to your home directory.
+
+```
+ln -s /home/server/hpc/grg ~/grg
+```
+
 ## Initial setup
 
 Install some packages that we need to get [dbd2netcdf](https://github.com/OSUGliders/dbd2netcdf) running
