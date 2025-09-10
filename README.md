@@ -24,7 +24,7 @@ ln -s /home/server/hpc/grg ~/grg
 
 **Only one person needs to do this for the packages to be globally available. As of 9/10/25 this has already been done.**
 
-Install some packages that we need to get [dbd2netcdf](https://github.com/OSUGliders/dbd2netcdf) running
+Install some packages that we need to get [`dbd2netcdf`](https://github.com/OSUGliders/dbd2netcdf) running
 
 ```
 cd ~
@@ -40,7 +40,7 @@ sudo make install  # otherwise permission denied...
 
 This threw some errors for me on make check and the last part of make install, but does appear to have installed successfully. 
 
-Now lets try and install `glide` with `pipx`. In future versions of of Ubuntu (26.04), this should be much easier. Unfortunately 24.04 only includes pipx version 1.4 which doesn't allow for global installations of packages. To get around this I dug up this comment in an GitHub issue: https://github.com/pypa/pipx/issues/1481#issuecomment-2593233084. Yes, someone backported pipx 1.6 to Ubuntu 24.04. It seems to work.
+Now lets try and install [`glide`](https://github.com/OSUGliders/glide) with `pipx`. In future versions of of Ubuntu (26.04), this should be much easier. Unfortunately 24.04 only includes pipx version 1.4 which doesn't allow for global installations of packages. To get around this I dug up this comment in an GitHub issue: https://github.com/pypa/pipx/issues/1481#issuecomment-2593233084. Yes, someone backported pipx 1.6 to Ubuntu 24.04. It seems to work.
 
 ```
 wget https://github.com/zinc75/pipx-1.6.0-backport-ubuntu-2404-lts/releases/download/1.6.0-1/pipx_1.6.0-1_all.deb
