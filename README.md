@@ -6,6 +6,14 @@ We use this server for moving files around, automated data pipelies, and some mi
 
 How was it created? We asked Thomas Olson to spin us up an Ubuntu 24.04 LTS VM with 4 CPUs, 8 GB RAM and 256 GB of memory (all expandable in the future).
 
+## Access
+
+Log in via ssh while on the OSU network.
+
+```
+ssh onid_name@gliderfs3.ceoas.oregonstate.edu
+```
+
 ## Initial setup
 
 Install some packages that we need to get [dbd2netcdf](https://github.com/OSUGliders/dbd2netcdf) running
@@ -24,12 +32,15 @@ sudo make install  # otherwise permission denied...
 
 This threw some errors for me on make check and the last part of make install, but does appear to have installed successfully. 
 
-Now lets try and install `glide`.
+Now lets try and install `glide` with `pipx`. In future versions of of Ubuntu (26.04), this should be much easier. Unfortunately 24.04 only includes pipx version 1.4 which doesn't allow for global installations of packages. To get around this I dug up this comment in an GitHub issue: https://github.com/pypa/pipx/issues/1481#issuecomment-2593233084. Yes, someone backported pipx 1.6 to Ubuntu 24.04. It seems to work.
+
+With `pipx` installed, run
 
 ```
-sudo apt install pipx
-pipx ensurepath  # strictly only sures local path, doesn't help for global installs
-
+sudo pipx install --global git+https://github.com/OSUGliders/glide.git
 ```
 
-I ran into problems here: https://github.com/pypa/pipx/issues/1481
+This appears to have worked. Now we have both dbd2netcdf and glide available for Slocum processing. 
+
+
+
