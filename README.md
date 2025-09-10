@@ -11,7 +11,7 @@ How was it created? We asked Thomas Olson to spin us up an Ubuntu 24.04 LTS VM w
 Log in via ssh while on the OSU network.
 
 ```
-ssh onid_name@gliderfs3.ceoas.oregonstate.edu
+ssh [YOUR_ONID]@gliderfs3.ceoas.oregonstate.edu
 ```
 
 ## Initial setup
