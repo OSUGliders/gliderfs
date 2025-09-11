@@ -53,7 +53,13 @@ With `pipx` installed, run
 sudo pipx install --global git+https://github.com/OSUGliders/glide.git
 ```
 
-This appears to have worked. Now we have both dbd2netcdf and glide available for Slocum processing. 
+This appears to have worked. Now we have both dbd2netcdf and glide available for Slocum processing.
+
+Let's install the [nco tools](https://nco.sourceforge.net/) too to help us operate on netCDF files.
+
+```
+sudo apt install nco
+```
 
 
 
