@@ -24,7 +24,7 @@ ln -s /home/server/hpc/grg ~/grg
 
 **Only one person needs to do this for the packages to be globally available. As of 9/10/25 this has already been done.**
 
-Install some packages that we need to get [`dbd2netcdf`](https://github.com/OSUGliders/dbd2netcdf) running
+First, install some packages that we need use [`dbd2netcdf`](https://github.com/OSUGliders/dbd2netcdf)
 
 ```
 cd ~
@@ -40,7 +40,7 @@ sudo make install  # otherwise permission denied...
 
 This threw some errors for me on make check and the last part of make install, but does appear to have installed successfully. 
 
-Now lets try and install [`glide`](https://github.com/OSUGliders/glide) with `pipx`. In future versions of of Ubuntu (26.04), this should be much easier. Unfortunately 24.04 only includes pipx version 1.4 which doesn't allow for global installations of packages. To get around this I dug up this comment in an GitHub issue: https://github.com/pypa/pipx/issues/1481#issuecomment-2593233084. Yes, someone backported pipx 1.6 to Ubuntu 24.04. It seems to work.
+Next, install [`glide`](https://github.com/OSUGliders/glide) with `pipx`. In future versions of Ubuntu (26.04), this should be much easier. Unfortunately 24.04 only includes pipx version 1.4 which doesn't allow for global installations of packages. To get around this I dug up this comment in an GitHub issue: https://github.com/pypa/pipx/issues/1481#issuecomment-2593233084. Someone backported pipx 1.6 to Ubuntu 24.04 and it seems to work.
 
 ```
 wget https://github.com/zinc75/pipx-1.6.0-backport-ubuntu-2404-lts/releases/download/1.6.0-1/pipx_1.6.0-1_all.deb
@@ -53,9 +53,13 @@ With `pipx` installed, run
 sudo pipx install --global git+https://github.com/OSUGliders/glide.git
 ```
 
-This appears to have worked. Now we have both dbd2netcdf and glide available for Slocum processing.
+This appears to have worked. Now we have both dbd2netcdf and glide available for Slocum processing. If glide needs to be updated, it can be reinstalled using
 
-Let's install the [nco tools](https://nco.sourceforge.net/) too to help us operate on netCDF files.
+```
+sudo pipx install --force --global git+https://github.com/OSUGliders/glide.git
+```
+
+We also install the [nco tools](https://nco.sourceforge.net/) to operate on netCDF files.
 
 ```
 sudo apt install nco
