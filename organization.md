@@ -12,6 +12,7 @@ Beyond the top level there are two main types of subdirectory:
 
 We break things down this way because gliders require special treatment. The data processing pipeline for gliders is being unified across gliders and projects.
 
+This is what the top level might look like:
 ```
 .
 ├── ARCTERX        # A project
@@ -24,12 +25,13 @@ We break things down this way because gliders require special treatment. The dat
 
 ## Glider data organization
 
+We distinguish between two main types of glider data, raw, and processed. Raw mainly means the binary files produced by the glider. Processed covers everything else. 
+
 Each glider deployment gets it's own subdirectory in raw. It is very important to name the deployments by data and serial number following the convention.
 
 Naming convetion: YYYYMMDD_<NAME & SERIAL>
 
-Within each
-
+This is what the raw directory might look like:
 ```
 glider-raw
 ├── 20250204_osu685     # A glider deployment
@@ -45,6 +47,7 @@ glider-raw
 
 Project data are organized as most appropriate for the project. For many projects, it is appropriate to break down the project into specific cruises. 
 
+This is what a project directory might look like:
 ```
 ARCTERX/
 ├── 2022-pilot  # A cruise
