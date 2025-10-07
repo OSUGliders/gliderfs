@@ -20,6 +20,10 @@ Once logged in, our group storage is located at `/home/server/hpc/grg/`. For con
 ln -s /home/server/hpc/grg ~/grg
 ```
 
+## Organization
+
+Good organization of data is critical and is described in separate document: [organization.md](organization.md).
+
 ## Initial setup
 
 **Only one person needs to do this for the packages to be globally available. As of 9/10/25 this has already been done.**
