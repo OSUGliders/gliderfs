@@ -2,10 +2,6 @@
 
 We try our best to keep everything organized in a logical structure with appropriate metadata.
 
-What is `grg/` for? It is for raw data, processed data, project-related metadata, and the code required to generate processed data from raw data.
-
-What is `grg/` not for? It is not for personal analysis projects. 
-
 ## Top level structure
 
 The top level directory in our "[hot](https://www.geeksforgeeks.org/system-design/differences-between-hot-data-and-cold-data-system-design/)" storage drive is `grg/`.
@@ -15,6 +11,10 @@ Beyond the top level there are two main types of subdirectory:
 * Glider data - for real time and delayed time data and processing
 
 We break things down this way because gliders require special treatment. The data processing pipeline for gliders is being unified across gliders and projects.
+
+*What is `grg/` for?* It is for raw data, processed data, project-related metadata, and the code required to generate processed data from raw data.
+
+*What is `grg/` not for?* It is not for personal analysis projects. 
 
 This is what the top level might look like:
 ```
@@ -36,6 +36,7 @@ Each glider deployment gets it's own subdirectory in raw. It is very important t
 Naming convetion: YYYYMMDD_<NAME & SERIAL>
 
 This is what the raw directory might look like:
+
 ```
 glider-raw
 ├── 20250204_osu685     # A glider deployment
@@ -49,6 +50,7 @@ glider-raw
 ```
 
 At the highest level the processed data should mirror the raw data:
+```
 glider-proc
 ├── 20250204_osu685
 │   ├── processing.sh      # Script to run dbd2netcdf & glide on data
@@ -65,6 +67,7 @@ glider-proc
 Project data are organized as appropriate for the project. For many projects, it is appropriate to break down the project into cruises or field operations. 
 
 This is what a project directory might look like:
+
 ```
 ARCTERX/
 ├── 2022-pilot  # A cruise
@@ -87,10 +90,12 @@ What about within a cruise? Usually, some kind of shared drive is set up on the 
 │   ├── vmp
 │   ├── mooring 
 │   └── bowchain 
-├── proc-code
+├── proc-code      # All the .m, .ipynb, .py, .R code needed to created the processed data. 
 │   ├── vmp
 │   ├── mooring
 │   └── bowchain
 └── scripts        # Any automatic data shuttling scripts
 ```
+
+It makes sense to keep refining the processing code and processed data after the cruise. It doesn't make sense to keep personal analysis projects in the analysis directory. 
 
