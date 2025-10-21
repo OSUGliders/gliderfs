@@ -19,12 +19,11 @@ We break things down this way because gliders require special treatment. The dat
 This is what the top level might look like:
 ```
 .
-├── ARCTERX        # A project
-├── glider-proc    # All processed glider data
-├── glider-raw     # All raw glider data, including real-time and post-recovery
-├── RIOT           # Another project
-├── SUNRISE        # Another project
-└── TH_Line        # Another project
+├── projects        # All project directories
+├── seaglider-proc  # All processed seaglider glider data
+├── seaglider-raw   # All raw seaglider data
+├── slocum-proc     # All processed slocum data
+└── slocum-raw      # All raw slocum data
 ```
 
 ## Glider data organization
@@ -38,14 +37,16 @@ Naming convetion: YYYYMMDD_<NAME & SERIAL>
 This is what the raw directory might look like:
 
 ```
-glider-raw
+slocum-raw
 ├── 20250204_osu685     # A glider deployment
 │   ├── post-recovery   # Data downloaded after recovery
-│   │   ├── flight      # .sbd, .dbd, .mdl, .mbd, .mlg
-│   │   ├── cache       # .cac
-│   │   ├── microrider  # .p, .q
-│   │   └── science     # .tbd, .ebd, .nlg, .nbd
-│   └── real-time       # Data transmitted over iridium (essentially a copy of SFMC directory)
+│   │   ├── flight      # .[dms][bc]d, .m[cl]g, autoexec.mi, sbdlist.dat, missions, mafiles
+│   │   ├── cache       # .c[ac]c
+│   │   ├── microrider  # .p, .q, .log, .cfg
+│   │   ├── ad2cp       # .ad2cp, .cfg, .log
+│   │   ├── azfp        #
+│   │   └── science     # .[ent][bc]d, .n[cl], .mr[id], proglets.dat, tbdlist.dat, urider.ini, urider.dat
+│   └── real-time       # A copy of SFMC directory
 └── 20250919_osu1267    # Another glider deployment
 ```
 
@@ -53,12 +54,16 @@ At the highest level the processed data should mirror the raw data:
 ```
 glider-proc
 ├── 20250204_osu685
-│   ├── processing.sh      # Script to run dbd2netcdf & glide on data
+│   ├── code                  # Software used to process the deployment
+│   │   └── processing.sh     # Script used to process the data
 │   ├── post-recovery
-│   │   ├── osu685.dbd.nc  # Output of dbd2netcdf
+│   │   ├── osu685.dbd.nc     # Output of dbd2netcdf
 │   │   ├── osu685.ebd.nc
-│   │   └── osu685.l2.nc   # Output of glide
-│   └── real-time      
+│   │   └── osu685.pr.l2.nc   # Output of glide
+│   └── real-time
+│   │   ├── osu685.sbd.nc     # Output of dbd2netcdf
+│   │   ├── osu685.tbd.nc
+│   │   └── osu685.rt.l2.nc   # Output of glide      
 └── 20250919_osu1267
 ```
 
