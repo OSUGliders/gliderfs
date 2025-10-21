@@ -1,6 +1,8 @@
 # Data organization
 
-We try our best to keep everything organized in a logical structure with appropriate metadata.
+*What is `grg/` for?* It is for raw data, processed data, project-related metadata, and the code required to generate processed data from raw data.
+
+*What is `grg/` not for?* It is not for personal analysis projects. 
 
 ## Top level structure
 
@@ -12,11 +14,7 @@ Beyond the top level there are two main types of subdirectory:
 
 We break things down this way because gliders require special treatment. The data processing pipeline for gliders is being unified across gliders and projects.
 
-*What is `grg/` for?* It is for raw data, processed data, project-related metadata, and the code required to generate processed data from raw data.
-
-*What is `grg/` not for?* It is not for personal analysis projects. 
-
-This is what the top level might look like:
+This is what the top level looks like:
 ```
 .
 ├── projects        # All project directories
@@ -54,8 +52,10 @@ At the highest level the processed data should mirror the raw data:
 ```
 glider-proc
 ├── 20250204_osu685
-│   ├── code                  # Software used to process the deployment
+│   ├── software              # Software used to process the deployment
 │   │   └── processing.sh     # Script used to process the data
+│   ├── logs                  # Log files produced by processing software
+│   │   └── glide.log         # A log file
 │   ├── post-recovery
 │   │   ├── osu685.dbd.nc     # Output of dbd2netcdf
 │   │   ├── osu685.ebd.nc
@@ -78,7 +78,7 @@ ARCTERX/
 ├── 2022-pilot  # A cruise
 ├── 2023-IOP    # Another cruise
 ├── 2025-IOP    # Another cruise
-└── glider      # Processed glider data soft linked from glider-proc
+└── glider      # Processed glider data soft linked from slocum-proc
 ```
 
 What about within a cruise? Usually, some kind of shared drive is set up on the ship. Standards of organization these drives vary, but a useful format to use is:
