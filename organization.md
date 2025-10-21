@@ -1,4 +1,4 @@
-# Data organization
+# Data organization in `grg/`
 
 *What is `grg/` for?* It is for raw data, processed data, project-related metadata, and the code required to generate processed data from raw data.
 
@@ -86,7 +86,7 @@ What about within a cruise? Usually, some kind of shared drive is set up on the 
 ```
 2025-IOP/
 ├── analysis       # Analysis conducted while at sea, should not be developed further here, but in personal folders
-├── data           # Raw data and metadata by instrument
+├── raw            # Raw data and metadata by instrument
 │   ├── vmp        # .p
 │   ├── mooring    # by mooring, and instrument
 │   └── bowchain   # by deployment and sensor
@@ -95,7 +95,7 @@ What about within a cruise? Usually, some kind of shared drive is set up on the 
 │   ├── vmp
 │   ├── mooring 
 │   └── bowchain 
-├── proc-code      # All the .m, .ipynb, .py, .R code needed to created the processed data. 
+├── software       # All the .m, .ipynb, .py, .R code needed to created the processed data. 
 │   ├── vmp
 │   ├── mooring
 │   └── bowchain
