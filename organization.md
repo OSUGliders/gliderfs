@@ -30,7 +30,7 @@ We distinguish between two main types of glider data; raw and processed. Raw dat
 
 Each glider deployment gets it's own subdirectory in raw. It is very important to name the deployments by data and serial number following the convention.
 
-Naming convetion: YYYYMMDD_<NAME & SERIAL>
+Naming convetion: YYYYMMDD_<NAME & SERIAL> (**Our convention is to set the date to be the recovery date.**)
 
 This is what the raw directory might look like:
 
