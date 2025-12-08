@@ -69,13 +69,13 @@ glider-proc
 │   ├── logs                  # Log files produced by processing software
 │   │   └── glide.log         # A log file
 │   ├── post-recovery
-│   │   ├── osu685.dbd.nc     # Output of dbd2netcdf
-│   │   ├── osu685.ebd.nc
-│   │   └── osu685.pr.l2.nc   # Output of glide
+│   │   ├── sl685.dbd.nc     # Output of dbd2netcdf
+│   │   ├── sl685.ebd.nc
+│   │   └── sl685.pr.l2.nc   # Output of glide
 │   └── real-time
-│   │   ├── osu685.sbd.nc     # Output of dbd2netcdf
-│   │   ├── osu685.tbd.nc
-│   │   └── osu685.rt.l2.nc   # Output of glide      
+│   │   ├── sl685.sbd.nc     # Output of dbd2netcdf
+│   │   ├── sl685.tbd.nc
+│   │   └── sl685.rt.l2.nc   # Output of glide      
 └── 20250919_sl1267
 ```
 
