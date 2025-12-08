@@ -36,7 +36,7 @@ This is what the raw directory might look like:
 
 ```
 slocum-raw
-├── 20250204_osu685     # A glider deployment
+├── 20250204_sl685     # A glider deployment
 │   ├── post-recovery   # Data downloaded after recovery
 │   │   ├── flight      # .[dms][bc]d, .m[cl]g, autoexec.mi, sbdlist.dat, missions, mafiles
 │   │   ├── cache       # .c[ac]c
@@ -45,13 +45,13 @@ slocum-raw
 │   │   ├── azfp        #
 │   │   └── science     # .[ent][bc]d, .n[cl], .mr[id], proglets.dat, tbdlist.dat, urider.ini, urider.dat
 │   └── real-time       # A copy of SFMC directory
-└── 20250919_osu1267    # Another glider deployment
+└── 20250919_sl1267    # Another glider deployment
 ```
 
 At the highest level the processed data should mirror the raw data:
 ```
 glider-proc
-├── 20250204_osu685
+├── 20250204_sl685
 │   ├── software              # Software used to process the deployment
 │   │   └── processing.sh     # Script used to process the data
 │   ├── logs                  # Log files produced by processing software
@@ -64,7 +64,7 @@ glider-proc
 │   │   ├── osu685.sbd.nc     # Output of dbd2netcdf
 │   │   ├── osu685.tbd.nc
 │   │   └── osu685.rt.l2.nc   # Output of glide      
-└── 20250919_osu1267
+└── 20250919_sl1267
 ```
 
 ## Project data organization
