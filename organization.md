@@ -38,14 +38,26 @@ This is what the raw directory might look like:
 slocum-raw
 ├── 20250204_sl685     # A glider deployment
 │   ├── post-recovery   # Data downloaded after recovery
-│   │   ├── flight      # .[dms][bc]d, .m[cl]g, autoexec.mi, sbdlist.dat, missions, mafiles
+│   │   ├── flight      # Organized as on the glider. Contains .[dms][bc]d, .m[cl]g, autoexec.mi, sbdlist.dat, missions, mafiles
 │   │   ├── cache       # .c[ac]c
 │   │   ├── microrider  # .p, .q, .log, .cfg
 │   │   ├── ad2cp       # .ad2cp, .cfg, .log
 │   │   ├── azfp        #
-│   │   └── science     # .[ent][bc]d, .n[cl], .mr[id], proglets.dat, tbdlist.dat, urider.ini, urider.dat
+│   │   └── science     # Organized as on the glider. Contains .[ent][bc]d, .n[cl], .mr[id], proglets.dat, tbdlist.dat, urider.ini, urider.dat
 │   └── real-time       # A copy of SFMC directory
 └── 20250919_sl1267    # Another glider deployment
+```
+
+Note that the flight and science data is organized the same way as on the glider, so might look something like:
+```
+flight/
+├── bin
+├── config
+├── LOGS
+├── mafiles
+├── missions
+├── SENTLOGS
+└── STATE
 ```
 
 At the highest level the processed data should mirror the raw data:
