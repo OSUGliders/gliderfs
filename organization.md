@@ -26,11 +26,11 @@ This is what the top level looks like:
 
 ## Glider data organization
 
-We distinguish between two main types of glider data; raw and processed. Raw data are binary files produced by the glider. Processed covers everything else. 
+We distinguish between two main types of glider data; raw and processed. Raw data are binary files produced by the glider, as well as all the configuration files. Essentially, raw data covers everything stored directly on the glider or transferred by the glider by satellite. Processed data covers everything derived from the raw data. 
 
 Each glider deployment gets it's own subdirectory in raw. It is very important to name the deployments by data and serial number following the convention.
 
-Naming convetion: YYYYMMDD_<NAME & SERIAL> (**Our convention is to set the date to be the recovery date.**)
+Naming convetion: YYYYMMDD_<NAME & SERIAL> (**Our convention is to set the date to be the deployment date.**)
 
 This is what the raw directory might look like:
 
@@ -48,7 +48,7 @@ slocum-raw
 └── 20250919_sl1267    # Another glider deployment
 ```
 
-Note that the flight and science data is organized the same way as on the glider, so might look something like:
+Note that the flight and science data should be a perfect copy of whatever is on the glider, which usually looks something like:
 ```
 flight/
 ├── bin
