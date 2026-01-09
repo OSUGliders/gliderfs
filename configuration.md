@@ -42,3 +42,13 @@ We also install the [nco tools](https://nco.sourceforge.net/) to operate on netC
 ```
 sudo apt install nco
 ```
+
+Installing pixi. I ran:
+
+```
+sudo curl -fsSL https://pixi.sh/install.sh | PIXI_BIN_DIR=/usr/local/bin PIXI_NO_PATH_UPDATE=1 bash
+```
+
+but then got a permission error and had to move the temporary file, e.g. sudo mv /tmp/tmp.[HASH]/pixi /usr/local/bin/pixi
+
+
