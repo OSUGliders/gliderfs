@@ -2,17 +2,47 @@
 
 In early January 2026 we tested a brand new Slocum G3S glider in Puget Sound. This document details the steps taken to monitor and process the real-time data.
 
-I logged into gliderfs3 and created a skeleton raw data directory using the template.
+Log into gliderfs3 and creat a skeleton raw data directory using the template.
 
 ```bash
-cd grg/slocum-raw
+cd ~/grg/slocum-raw
 cp -r YYYYMMDD_slXXX/ 20260113_sl1267
 ```
 
-I setup a cron job to pull files from our SFMC server every minute. 
+Create a skeleton processed data directory using the template.
+
+```bash
+cd ~/grg/slocum-proc
+cp -r YYYYMMDD_slXXX/ 20260113_sl1267
+```
+
+Setup a cron job to pull files from our SFMC server every minute. 
 
 ```
 crontab -e  # then input the line below, save, and exit.
 * * * * * rsync -va glideruser@gliderfs2:/data/Dockserver/gliderfmc0/osu1267/ ~/grg/slocum-raw/20260113_sl1267/real-time/ > /dev/null 2>&1
 ```
 I included the last part `> /dev/null 2>&1` to stop cron from emailing me. 
+
+Create a processing script in `~/slocum-proc/20260113_sl1267/software`.
+
+```
+# This script will run on gliderfs3
+
+# Parameters
+deployment=20260113_sl1267
+glider=sl1267
+save_dir=../real-time
+cache=../../../slocum-raw/"${deployment}"/cache/
+
+# Processing
+raw_root=../../../slocum-raw/"${deployment}"/real-time/
+dbd2netCDF -V 2>&1 | tee -a ../logs/dbd2netcdf.rt.log  # print version number to log
+dbd2netCDF -v -o $save_dir/$glider.sbd.nc $raw_root/from-glider/*.sbd -C $cache 2>&1 | tee -a ../logs/dbd2netcdf.rt.log
+dbd2netCDF -v -o $save_dir/$glider.tbd.nc $raw_root/from-glider/*.tbd -C $cache 2>&1 | tee -a ../logs/dbd2netcdf.rt.log
+dbd2netCDF -v -o $save_dir/$glider.dbd.nc $raw_root/from-glider/*.dbd -C $cache 2>&1 | tee -a ../logs/dbd2netcdf.rt.log
+glide -v 2>&1 | tee -a ../logs/glide.rt.log  # print version number to log
+# glide --log-file=../logs/glide.log --log-level=debug l2 $save_dir/$glider.sbd.nc $save_dir/$glider.tbd.nc -o $save_dir/$glider.l2.rt.nc -s 3
+# glide --log-file=../logs/glide.log --log-level=debug l3 $save_dir/$glider.l2.rt.nc -o $save_dir/$glider.l3.rt.nc -b 1
+```
+
