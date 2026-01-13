@@ -13,6 +13,6 @@ I setup a cron job to pull files from our SFMC server every minute.
 
 ```
 crontab -e  # then input the line below, save, and exit.
-* * * * * rsync -va glideruser@gliderfs2:/data/Dockserver/gliderfmc0/unit_1267/ ~/grg/slocum-raw/20260113_sl1267/real-time/ > /dev/null 2>&1
+* * * * * rsync -va glideruser@gliderfs2:/data/Dockserver/gliderfmc0/osu1267/ ~/grg/slocum-raw/20260113_sl1267/real-time/ > /dev/null 2>&1
 ```
 I included the last part `> /dev/null 2>&1` to stop cron from emailing me. 
