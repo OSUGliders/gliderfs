@@ -24,7 +24,7 @@ crontab -e  # then input the line below, save, and exit.
 ```
 I included the last part `> /dev/null 2>&1` to stop cron from emailing me. 
 
-Create a processing script in `~/slocum-proc/20260113_sl1267/software`.
+Create a processing script `~/slocum-proc/20260113_sl1267/software/real-time-processing.sh`.
 
 ```
 # This script will run on gliderfs3
@@ -45,4 +45,8 @@ glide -v 2>&1 | tee -a ../logs/glide.rt.log  # print version number to log
 # glide --log-file=../logs/glide.log --log-level=debug l2 $save_dir/$glider.sbd.nc $save_dir/$glider.tbd.nc -o $save_dir/$glider.l2.rt.nc -s 3
 # glide --log-file=../logs/glide.log --log-level=debug l3 $save_dir/$glider.l2.rt.nc -o $save_dir/$glider.l3.rt.nc -b 1
 ```
-
+run script with 
+```
+cd ~/slocum-proc/20260113_sl1267/software/
+./real-time-processing.sh
+```
