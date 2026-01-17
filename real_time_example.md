@@ -42,8 +42,8 @@ dbd2netCDF -v -o $save_dir/$glider.sbd.nc $raw_root/from-glider/*.sbd -C $cache 
 dbd2netCDF -v -o $save_dir/$glider.tbd.nc $raw_root/from-glider/*.tbd -C $cache 2>&1 | tee -a ../logs/dbd2netcdf.rt.log
 dbd2netCDF -v -o $save_dir/$glider.dbd.nc $raw_root/from-glider/*.dbd -C $cache 2>&1 | tee -a ../logs/dbd2netcdf.rt.log
 glide -v 2>&1 | tee -a ../logs/glide.rt.log  # print version number to log
-# glide --log-file=../logs/glide.log --log-level=debug l2 $save_dir/$glider.sbd.nc $save_dir/$glider.tbd.nc -o $save_dir/$glider.l2.rt.nc -s 3
-# glide --log-file=../logs/glide.log --log-level=debug l3 $save_dir/$glider.l2.rt.nc -o $save_dir/$glider.l3.rt.nc -b 1
+# glide --log-file=../logs/glide.rt.log --log-level=debug l2 $save_dir/$glider.sbd.nc $save_dir/$glider.tbd.nc -o $save_dir/$glider.l2.rt.nc -s 3
+# glide --log-file=../logs/glide.rt.log --log-level=debug l3 $save_dir/$glider.l2.rt.nc -o $save_dir/$glider.l3.rt.nc -b 1
 ```
 run script with 
 ```
