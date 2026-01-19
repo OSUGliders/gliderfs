@@ -2,7 +2,7 @@
 
 In early January 2026 we tested a brand new Slocum G3S glider in Puget Sound. This document details the steps taken to monitor and process the real-time data.
 
-Log into gliderfs3 and creat a skeleton raw data directory using the template.
+Log into gliderfs3 and create a skeleton raw data directory using the template.
 
 ```bash
 cd ~/grg/slocum-raw
@@ -45,8 +45,17 @@ glide -v 2>&1 | tee -a ../logs/glide.rt.log  # print version number to log
 # glide --log-file=../logs/glide.rt.log --log-level=debug l2 $save_dir/$glider.sbd.nc $save_dir/$glider.tbd.nc -o $save_dir/$glider.l2.rt.nc -s 3
 # glide --log-file=../logs/glide.rt.log --log-level=debug l3 $save_dir/$glider.l2.rt.nc -o $save_dir/$glider.l3.rt.nc -b 1
 ```
-run script with 
+
+Run the script.
+
 ```
 cd ~/slocum-proc/20260113_sl1267/software/
 ./real-time-processing.sh
+```
+
+After recovery, stop the cron job.
+
+```
+crontab -e
+# Then comment out the line
 ```
