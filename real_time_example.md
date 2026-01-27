@@ -59,3 +59,5 @@ After recovery, stop the cron job.
 crontab -e
 # Then comment out the line
 ```
+
+In summary, real-time processing was not fully setup for this job.
