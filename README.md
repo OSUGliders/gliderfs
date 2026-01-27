@@ -27,3 +27,7 @@ Good organization of data is critical and is described in separate document: [or
 ## Configuration
 
 Configuration instructions: [configuration.md](configuration.md)
+
+## Real-time processing example
+
+First attempt documented: [real_time_example.md](real_time_example.md)
