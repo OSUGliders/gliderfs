@@ -50,7 +50,7 @@ The script should be modified as needed for each glider deployment.
 Once created, set the script permissions to execute, e.g.
 
 ```
-chmod ug+x post-recovery-dbd2netcdf.sh
+chmod ug+x post-recovery-L1.sh
 ```
 
 Run in the terminal using:
@@ -77,4 +77,4 @@ glide -v 2>&1 | tee -a ../logs/glide.pr.log  # print version number to log
 # glide --log-file=../logs/glide.pr.log --log-level=debug l3 $save_dir/$glider.pr.l2.nc -o $save_dir/$glider.pr.l2.nc -b 1
 ```
 
-The script should be modified as needed for each glider deployment, including additional configuration for glide. It could be desirable to split L2 and L3 into separate scripts.
+The script should be modified as needed for each glider deployment, including additional configuration for glide. It could be desirable to split L2 and L3 into separate scripts. Don't forget to set execute permissions. 
