@@ -30,9 +30,9 @@ We distinguish between two main types of glider data; raw and processed. Raw dat
 
 Each glider deployment gets it's own subdirectory in raw. It is very important to name the deployments by data and serial number following the convention.
 
-Naming convetion: YYYYMMDD_<NAME & SERIAL> (**Our convention is to set the date to be the deployment date.**)
+Naming convetion: YYYYMMDD_<NAME & SERIAL> (**YYYYMMDD is the deployment date**)
 
-This is what the raw directory might look like:
+The raw directory should look like this:
 
 ```
 slocum-raw
@@ -60,7 +60,7 @@ flight/
 └── STATE
 ```
 
-At the highest level the processed data should mirror the raw data:
+At the deployment level the processed data should mirror the raw data using the same YYYYMMDD_<NAME & SERIAL> folder convention. Beyond this level data are organized as follows: 
 ```
 glider-proc
 ├── 20250204_sl685
@@ -93,7 +93,7 @@ ARCTERX/
 └── glider      # Processed glider data soft linked from slocum-proc
 ```
 
-What about within a cruise? Usually, some kind of shared drive is set up on the ship. Standards of organization these drives vary, but a useful format to use is:
+Within a cruise, standards may vary. Usually, some kind of shared drive is set up on the ship. A useful format to use is:
 
 ```
 2025-IOP/
@@ -114,5 +114,5 @@ What about within a cruise? Usually, some kind of shared drive is set up on the 
 └── scripts        # Any automatic data shuttling scripts
 ```
 
-It makes sense to keep refining the processing code and processed data after the cruise. It doesn't make sense to keep personal analysis projects in the analysis directory. 
+It is logical to keep refining the processing code and processed data after the cruise. Prsonal analysis projects should be copied to new locations (e.g. the users home directory). 
 
