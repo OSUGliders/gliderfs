@@ -28,6 +28,10 @@ Good organization of data is critical and is described in separate document: [or
 
 Configuration instructions: [configuration.md](configuration.md)
 
+## Post-recovery processing steps
+
+Steps detailed in: [slocum_post_recovery_workflow.md](slocum_post_recovery_workflow.md)
+
 ## Real-time processing example
 
-First attempt documented: [real_time_example.md](real_time_example.md)
+First attempt documented: [slocum_real_time_example.md](slocum_real_time_example.md)
