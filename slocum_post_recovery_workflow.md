@@ -13,7 +13,7 @@ cd ~/grg/slocum-raw
 cp -r YYYYMMDD_slXXX/ <YOUR DATE>_<YOUR SERIAL>
 ```
 
-Copy the data into `~/grg/slocum-raw/YYYYMMDD_slXXX/post-recovery/<DATA SOURCE>/`. 
+Then, copy the data into `~/grg/slocum-raw/YYYYMMDD_slXXX/post-recovery/<DATA SOURCE>/`. 
 
 ## Step 2: create a processed folder for the deployment
 
@@ -24,11 +24,11 @@ cd ~/grg/slocum-proc
 cp -r YYYYMMDD_slXXX/ <YOUR DATE>_<YOUR SERIAL>
 ```
 
-## Step 3: create a shell script using dbd2netcdf to perform L0 -> L1 processing
+## Step 3: create a shell script to perform L0 -> L1 processing
 
-Processing steps should be placed into shell scrips in `~/grg/slocum-proc/YYYYMMDD_slXXX/software/`.
+Processing are documented and executed in shell scrips in `~/grg/slocum-proc/YYYYMMDD_slXXX/software/`. The L0 -> L1 conversion is done using `dbd2netcdf`.
 
-Below is an example that could be named `post-recovery-dbd2netcdf.sh`.
+Below is an example script that could be named `post-recovery-L1.sh`.
 ```
 # This script will run on gliderfs3
 
@@ -53,14 +53,16 @@ Once created, set the script permissions to execute, e.g.
 chmod ug+x post-recovery-dbd2netcdf.sh
 ```
 
-Run in the terminal using
+Run in the terminal using:
 ```
 ./post-recovery-dbd2netcdf.sh
 ```
 
-## Step 5: create a shell script using glide to perform L1 -> L2 -> L3 processing
+## Step 4: create a shell script to perform L1 -> L2 -> L3 processing
 
-Below is an example that could be named `post-recovery-glide.sh`.
+The L1 -> L2 -> L3 conversion is done using `glide`.
+
+Below is an example script that could be named `post-recovery-L2-L3.sh`.
 ```
 # This script will run on gliderfs3
 
