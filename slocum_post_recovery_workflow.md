@@ -74,7 +74,7 @@ save_dir=../post-recovery
 # Processing
 glide -v 2>&1 | tee -a ../logs/glide.pr.log  # print version number to log
 # glide --log-file=../logs/glide.pr.log --log-level=debug l2 $save_dir/$glider.dbd.nc $save_dir/$glider.ebd.nc -o $save_dir/$glider.pr.l2.nc -s 3
-# glide --log-file=../logs/glide.pr.log --log-level=debug l3 $save_dir/$glider.pr.l2.nc -o $save_dir/$glider.pr.l2.nc -b 1
+# glide --log-file=../logs/glide.pr.log --log-level=debug l3 $save_dir/$glider.pr.l2.nc -o $save_dir/$glider.pr.l3.nc -b 1
 ```
 
 The script should be modified as needed for each glider deployment, including additional configuration for glide. It could be desirable to split L2 and L3 into separate scripts. Don't forget to set execute permissions. 
