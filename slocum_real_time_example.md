@@ -20,14 +20,14 @@ Setup a cron job to pull files from our SFMC server every minute.
 
 ```
 crontab -e  # then input the line below, save, and exit.
-* * * * * rsync -va glideruser@gliderfs2:/data/Dockserver/gliderfmc0/osu1267/ ~/grg/slocum-raw/20260113_sl1267/real-time/ > /dev/null 2>&1
+* * * * * rsync -vrlt glideruser@gliderfs2:/data/Dockserver/gliderfmc0/osu1267/ ~/grg/slocum-raw/20260113_sl1267/real-time/ > /dev/null 2>&1
 ```
-I included the last part `> /dev/null 2>&1` to stop cron from emailing me. 
+I included the last part `> /dev/null 2>&1` to stop cron from emailing me. Note that we do not use the `-a` option because that messes up permissions in the target folder.
 
 Note in order for the cron job to work you need a ssh-key access between gliderfs2 and gliderfs3. When the ssh key is in place, run rsync outside of the cron job once, as you have to confirm the usage of the ssh key on the first use. If you fail to do this the cron job will run into a host authentication error. I simply ran:
 
 ```
-rsync -va glideruser@gliderfs2:/data/Dockserver/gliderfmc0/osu1267/ ~/grg/slocum-raw/20260113_sl1267/real-time/
+rsync -vrlt glideruser@gliderfs2:/data/Dockserver/gliderfmc0/osu1267/ ~/grg/slocum-raw/20260113_sl1267/real-time/
 ```
 
 Create a processing script `~/slocum-proc/20260113_sl1267/software/real-time-processing.sh`.
