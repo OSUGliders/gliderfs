@@ -1,6 +1,6 @@
 ## Working with real-time data
 
-In early January 2026 we tested a brand new Slocum G3S glider in Puget Sound. This document details the steps taken to monitor and process the real-time data.
+In early January 2026 we tested a brand new Slocum G3S glider in Puget Sound. This document details the steps taken to monitor and process the real-time data, with some later additions as we learned from our mistakes.
 
 Log into gliderfs3 and create a skeleton raw data directory using the template.
 
