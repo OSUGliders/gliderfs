@@ -36,8 +36,8 @@ Create a processing script `~/slocum-proc/20260113_sl1267/software/real-time-pro
 # This script will run on gliderfs3
 
 # Parameters
-deployment=20260113_sl1267
-glider=sl1267
+deployment=YYYYMMDD_slXXX/
+glider=slXXXX
 save_dir=../real-time
 cache=../../../slocum-raw/"${deployment}"/cache/
 
