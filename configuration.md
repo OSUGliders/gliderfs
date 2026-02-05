@@ -51,4 +51,32 @@ sudo curl -fsSL https://pixi.sh/install.sh | PIXI_BIN_DIR=/usr/local/bin PIXI_NO
 
 but then got a permission error and had to move the temporary file, e.g. sudo mv /tmp/tmp.[HASH]/pixi /usr/local/bin/pixi
 
+## Updating dbd2netcdf
 
+Log in and checkout the latest version of dbd2netdf from git. I (Jesse) last did this while writing this page on 2026-02-04.
+
+```sh
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+ctest --test-dir build --output-on-failure
+sudo cmake --install build
+```
+
+I got the following output:
+```
+-- Install configuration: "Release"
+-- Installing: /usr/local/bin/dbd2netCDF
+-- Installing: /usr/local/bin/pd02netCDF
+-- Installing: /usr/local/bin/dbd2csv
+-- Installing: /usr/local/bin/dbdSensors
+-- Installing: /usr/local/bin/decompressTWR
+-- Installing: /usr/local/man/man1/dbd2netCDF.1
+-- Installing: /usr/local/man/man1/dbd2csv.1
+-- Installing: /usr/local/man/man1/dbdSensors.1
+CMake Error at build/cmake_install.cmake:83 (file):
+  file failed to open for writing (Permission denied):
+
+    /home/server/pi/homes/cusackje/dbd2netcdf/build/install_manifest.txt
+```
+
+Most of the parts were successfully installed into `/usr/local/bin/`. I don't think the manifest error is important. 
