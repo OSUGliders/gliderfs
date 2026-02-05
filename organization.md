@@ -28,7 +28,7 @@ This is what the top level looks like:
 
 We distinguish between two main types of glider data; raw and processed. Raw data are binary files produced by the glider, as well as all the configuration files. Essentially, raw data covers everything stored directly on the glider or transferred by the glider by satellite. Processed data covers everything derived from the raw data. 
 
-We also distinguish between real-time and post-recovery data. Real-time includes anything transferred to shore or boat while the glider is in the water, either via iridium or radio comms. For most deployments real-time will contain a copy of the Slocum Fleet Mission Control (SFMC) directory. Post-recovery includes data transfered over cable or reading the storage card directly. 
+We also distinguish between real-time and post-recovery data. Real-time includes anything transferred to shore or boat while the glider is in the water, either via iridium or radio comms. For most deployments real-time will contain a copy of the Slocum Fleet Mission Control (SFMC) directory. Post-recovery includes data transfered over cable or reading the storage card directly. There will neessarily be some overlap between the contents of these directories, since all the decimated files sent over iridium are also stored on the glider, this is not a problem because they don't take up much space.
 
 Each glider deployment gets it's own subdirectory in raw. It is very important to name the deployments by data and serial number following the convention.
 
