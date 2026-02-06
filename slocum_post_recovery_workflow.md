@@ -13,7 +13,7 @@ cd ~/grg/slocum-raw
 cp -r YYYYMMDD_slXXX/ <YOUR DATE>_<YOUR SERIAL>
 ```
 
-Then, copy the data into `~/grg/slocum-raw/YYYYMMDD_slXXX/post-recovery/<DATA SOURCE>/`. 
+Then, copy the data into `~/grg/slocum-raw/YYYYMMDD_slXXX/post-recovery/<DATA SOURCE>/`. E.g. the `post-recovery/flight` contains a copy of the flight computer, `post-recovery/science` a copy of science, `post-recovery/microrider` a copy of the microrider data directory... etc. 
 
 ## Step 2: create a processed folder for the deployment
 
@@ -78,3 +78,30 @@ glide -v 2>&1 | tee -a ../logs/glide.pr.log  # print version number to log
 ```
 
 The script should be modified as needed for each glider deployment, including additional configuration for glide. It could be desirable to split L2 and L3 into separate scripts. Don't forget to set execute permissions. 
+
+# Additional processing for other sensors
+
+## MicroRider
+
+My first attempt at processing microrider data used the following script, which I called `post-recovery-MR.sh`.
+
+```
+# This script will run on gliderfs3
+
+# Parameters
+deployment=20260204_sl1267
+glider=sl1267
+save_dir=../post-recovery/microrider
+input_data=../../../slocum-raw/"${deployment}"/post-recovery/microrider
+
+# File conversion
+pyturb --log-level=debug p2nc -o "$save_dir"/p2nc "$input_data"/*.p
+
+# Epsilon computation
+pyturb --log-level=debug eps -o "$save_dir"/eps -w --pitch-correction -f 1 -d 4 -a ../post-recovery/sl1267.pr.l2.nc --aux-temp temperature --aux-sal salinity "$save_dir"/p2nc/*.nc
+
+# Bin data
+pyturb --log-level=debug bin -o "$save_dir"/sl1267.mr.binned.nc -b 2 --dmax=200 "$save_dir"/eps/*.nc
+```
+
+
