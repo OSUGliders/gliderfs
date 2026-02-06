@@ -51,6 +51,14 @@ sudo curl -fsSL https://pixi.sh/install.sh | PIXI_BIN_DIR=/usr/local/bin PIXI_NO
 
 but then got a permission error and had to move the temporary file, e.g. sudo mv /tmp/tmp.[HASH]/pixi /usr/local/bin/pixi
 
+Installing pyturb, our new and experimental microstructure processing software.
+
+```
+sudo pipx install --global git+https://github.com/oceancascades/pyturb.git
+```
+
+That worked without hiccups...!
+
 ## Updating dbd2netcdf
 
 Log in and checkout the latest version of dbd2netdf from git. I (Jesse) last did this while writing this page on 2026-02-04.
