@@ -28,7 +28,7 @@ DEPLOYMENT_DIR="${DEPLOYMENT_DATE}_${GLIDER}"
 REMOTE_SRC="glideruser@gliderfs2:/data/Dockserver/gliderfmc0/osu685/"
 GRG="/home/server/pi/homes/cusackje/grg/"
 
-LOCAL_RAW="${GRG}slocum-raw/${DEPLOYMENT_DIR}/real-time/from-glider/"
+LOCAL_RAW="${GRG}slocum-raw/${DEPLOYMENT_DIR}/real-time/"
 CACHE="${GRG}slocum-raw/${DEPLOYMENT_DIR}/cache/"
 OUTPUT_L1="${GRG}slocum-proc/${DEPLOYMENT_DIR}/real-time/l1/"
 
@@ -43,7 +43,7 @@ if [ $? -eq 0 ]; then
     # Loop through all glider files in the local directory
     shopt -s nullglob
 
-    for file in "$LOCAL_RAW"/*.[st]bd; do
+    for file in "$LOCAL_RAW"/from-glider/*.[st]bd; do
         
         filename=$(basename -- "$file")
         
