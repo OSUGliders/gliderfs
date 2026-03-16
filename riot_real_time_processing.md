@@ -66,8 +66,13 @@ fi
 echo "Job complete at $(date)"
 ```
 
+Make script executable
 
-Next I setup a systemd service
+```
+chmod u+x sl685-pull-proc-push.sh
+```
+
+Setup systemd service
 
 ```
 sudo vi /etc/systemd/system/sl685.service
@@ -88,7 +93,7 @@ StandardOutput=journal
 StandardError=journal
 ```
 
-Next I set up a timer
+Setup service timer
 
 ```
 sudo vi /etc/systemd/system/sl685.timer
@@ -107,10 +112,16 @@ Persistent=true
 WantedBy=timers.target
 ```
 
-Start the timer
+Start timer
 
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable sl685.timer
 sudo systemctl start sl685.timer
+```
+
+Monitor logs
+
+```
+sudo journalctl -u sl685.service -e
 ```
