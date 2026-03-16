@@ -1,6 +1,6 @@
 # Documentation for the RIOT real-time processing
 
-First, I created folders in `slocum-raw` and `slocum-proc` using the templates. The `slocum-proc` following structure was created in `20260317_sl685`:
+First, I created folders in `slocum-raw` and `slocum-proc` using the templates. In `slocum-proc/20260317_sl685` I followed this structure:
 
 ```
 ├── logs
@@ -72,7 +72,7 @@ Make script executable
 chmod u+x sl685-pull-proc-push.sh
 ```
 
-Setup systemd service
+Setup systemd service. Need to execute with `/bin/bash` to avoid permission issues.
 
 ```
 sudo vi /etc/systemd/system/sl685.service
@@ -87,7 +87,7 @@ After=network.target
 Type=oneshot
 User=cusackje
 Group=glider_group
-ExecStart=/home/server/pi/homes/cusackje/grg/slocum-proc/20260317_sl685/software/sl685-pull-proc-push.sh
+ExecStart=/bin/bash /home/server/pi/homes/cusackje/grg/slocum-proc/20260317_sl685/software/sl685-pull-proc-push.sh
 
 StandardOutput=journal
 StandardError=journal
