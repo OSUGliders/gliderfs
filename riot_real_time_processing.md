@@ -106,3 +106,11 @@ Persistent=true
 [Install]
 WantedBy=timers.target
 ```
+
+Start the timer
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable sl685.timer
+sudo systemctl start sl685.timer
+```
