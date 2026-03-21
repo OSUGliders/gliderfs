@@ -14,7 +14,7 @@ First, I created folders in `slocum-raw` and `slocum-proc` using the templates. 
 └── software
 ```
 
-Script to process all the data `software/sl685-pull-proc-push.sh`.
+Script to process all the data `software/sl685-pull-proc-push.sh`. This script started simple but was gradually enhanced to include a lot of features.
 
 ```bash
 #!/bin/bash
@@ -59,6 +59,21 @@ COMBINED_L3="${OUTPUT_L3}${DEPLOYMENT_DIR}.l3.nc"
 LOG_L2="${LOG_DIR}${GLIDER}_l2.log"
 LOG_L3="${LOG_DIR}${GLIDER}_l3.log"
 
+# Shrink file by fixing unlimited dimensions and chunk size
+shrink_nc() {
+    local nc_file="$1"
+    [[ ! -f "$nc_file" ]] && return
+
+    # Extract dimension lengths (fallback to 1 if missing)
+    local i_len=$(ncdump -h "$nc_file" | grep -m1 "i = UNLIMITED" | grep -Eo '[0-9]+')
+    local j_len=$(ncdump -h "$nc_file" | grep -m1 "j = UNLIMITED" | grep -Eo '[0-9]+')
+    i_len=${i_len:-1}
+    j_len=${j_len:-1}
+
+    # Apply nccopy and overwrite
+    nccopy -u -c "i/${i_len},j/${j_len}" "$nc_file" "${nc_file}.tmp" && mv "${nc_file}.tmp" "$nc_file"
+}
+
 touch "$PROCESSED_LOG"
 
 echo "Starting glider sync at $(date)"
@@ -100,6 +115,7 @@ for file in "$LOCAL_RAW"/from-glider/*.[st]bd; do
     if [[ ! -f "$expected_nc" ]]; then
         echo "Processing new file: $filename"
         /usr/local/bin/dbd2netCDF -v -C "$CACHE" -o "$expected_nc" "$file"
+        shrink_nc "$expected_nc"
         NEW_FILES_FOUND=true
     fi
 done
@@ -118,10 +134,12 @@ if $NEED_COMBINED; then
     if [[ ${#SBD_FILES[@]} -gt 0 ]]; then
         echo "Combining ${#SBD_FILES[@]} sbd files into sbd.nc"
         /usr/local/bin/dbd2netCDF -v -C "$CACHE" -o "$COMBINED_SBD" "${SBD_FILES[@]}"
+        shrink_nc "$COMBINED_SBD"
     fi
     if [[ ${#TBD_FILES[@]} -gt 0 ]]; then
         echo "Combining ${#TBD_FILES[@]} tbd files into tbd.nc"
         /usr/local/bin/dbd2netCDF -v -C "$CACHE" -o "$COMBINED_TBD" "${TBD_FILES[@]}"
+        shrink_nc "$COMBINED_TBD"
     fi
 
     # Run L2 and L3 on combined files
@@ -136,7 +154,7 @@ if $NEED_COMBINED; then
             echo "Generating combined L3"
             glide --log-level=debug --log-file="$LOG_L3" l3 \
                 -o "$COMBINED_L3" \
-                -b 5 -d 550 \
+                -b 6 -d 800 \
                 -c "${SOFTWARE}${GLIDER}.glide.config.yml" \
                 "$COMBINED_L2"
         fi
