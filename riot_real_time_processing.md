@@ -1,6 +1,10 @@
 # Documentation for the RIOT real-time processing
 
-First, I created folders in `slocum-raw` and `slocum-proc` using the templates. In `slocum-proc/20260317_sl685` I followed this structure:
+First, I created folders in `slocum-raw` and `slocum-proc` using the templates. 
+
+In the `slocum-raw` part, don't forget to add a directory for the cache files.
+
+In `slocum-proc/20260317_sl685` I followed this structure:
 
 ```
 ├── logs
@@ -14,9 +18,9 @@ First, I created folders in `slocum-raw` and `slocum-proc` using the templates. 
 └── software
 ```
 
-Create a to process all the data `software/[sl685-pull-proc-push.sh](sl685-pull-proc-push.sh)`. This script started out relatively simple. However, it grew and grew over the course of the experiment as new features were added. We should definitely investigate using a better data pipeline tool, like snakemake.
+Create a bash script to process all the data `software/sl685-pull-proc-push.sh`. An example lives [here](./sl685-pull-proc-push.sh). The script started out relatively simple. However, it grew and grew over the course of the experiment as new features were added. We should definitely investigate using a better data pipeline tool, like snakemake, in the future.
 
-Make script executable.
+Make the script executable.
 
 ```
 chmod u+x sl685-pull-proc-push.sh
