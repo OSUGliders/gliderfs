@@ -13,12 +13,15 @@ In `slocum-proc/20260317_sl685` I followed this structure:
 │   ├── acoustics  # for the RIOT csv
 │   ├── erddap  # from glide running over dive segments at l2
 │   ├── l1  # from dbd2ncdf
+│   ├── l1-combined  # from dbd2ncdf
 │   ├── l2  # glide l2
-│   └── l3  # glide l3
+│   ├── l3  # glide l3, with epsilon data merged in.
+│   ├── mri  # q2netcdf conversion of mri
+│   └── mri-combined  # glide concat of the mri files
 └── software
 ```
 
-Create a bash script to process all the data `software/sl685-pull-proc-push.sh`. An example lives [here](./sl685-pull-proc-push.sh). The script started out relatively simple. However, it grew and grew over the course of the experiment as new features were added. We should definitely investigate using a better data pipeline tool, like snakemake, in the future.
+Create a bash script to process all the data `software/sl685-pull-proc-push.sh`. An example lives [here](./sl685-pull-proc-push.sh). The script started out relatively simple. However, it grew and grew over the course of the experiment as new features were added. We should definitely investigate using a better data pipeline tool, like snakemake, in the future. For the RIOT project only `acoustics`, `erddapp`, `l2`, and `l3` were pushed up to AWS.
 
 Make the script executable.
 
