@@ -61,6 +61,12 @@ Install `q2netcdf`:
 sudo pipx install --global git+https://github.com/mousebrains/q2netcdf
 ```
 
+Install `slocum-tpw`:
+
+```
+sudo pipx install --global git+https://github.com/mousebrains/q2netcdf
+```
+
 ## Updating dbd2netcdf
 
 Log in and checkout the latest version of dbd2netdf from git. I (Jesse) last did this while writing this page on 2026-02-04.
