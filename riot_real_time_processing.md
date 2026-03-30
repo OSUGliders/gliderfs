@@ -103,4 +103,4 @@ sudo systemctl reset-failed
 
 ## Sproul data processing
 
-To push data from RV Sproul to the AWS I setup a cronjob to sync the processed adcp data from the UHDAS folder. I also setup a service that ran a python script to compile the met data (just position, wind speed, and direction) into a netcdf file. These were hosted on ock7. The python script was located in my home directory. The service and timer were disabled at the end of the cruise, but not deleted, in anticipation of a future cruise. 
+To push data from RV Sproul to the AWS I setup a cronjob to sync the processed adcp data from the UHDAS folder. I also setup a service (`sproul-met.[service/timer]`) that ran a python script to compile the met data (just position, wind speed, and direction) into a netcdf file. These were hosted on ock7. The python script was located in my home directory. The service and timer were disabled at the end of the cruise, but not deleted, in anticipation of a future cruise. 
