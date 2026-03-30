@@ -23,7 +23,7 @@ In `slocum-proc/20260317_sl685` I followed this structure:
 
 Create a bash script to process all the data `software/sl685-pull-proc-push.sh`. An example lives [here](./sl685-pull-proc-push.sh). The script started out relatively simple. However, it grew and grew over the course of the experiment as new features were added. We should definitely investigate using a better data pipeline tool, like snakemake, in the future. For the RIOT project only `acoustics`, `erddapp`, `l2`, and `l3` were pushed up to AWS.
 
-Make the script executable.
+The script is executed as a service on a timer. First make the script executable.
 
 ```
 chmod u+x sl685-pull-proc-push.sh
@@ -81,8 +81,20 @@ sudo systemctl enable sl685.timer
 sudo systemctl start sl685.timer
 ```
 
-Monitor logs.
+To monitor logs use:
 
 ```
 sudo journalctl -u sl685.service -e
+```
+
+To shut the service down and delete the files use:
+
+```
+sudo systemctl stop sl685.timer
+sudo systemctl stop sl685.service
+sudo systemctl disable sl685.timer
+sudo rm /etc/systemd/system/sl685.timer
+sudo rm /etc/systemd/system/sl685.service
+sudo systemctl daemon-reload
+sudo systemctl reset-failed
 ```
