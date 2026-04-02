@@ -2,11 +2,11 @@
 
 **Only one person needs to do this for the packages to be globally available. As of 9/10/25 this has already been done.**
 
-First, install some packages that we need use [`dbd2netcdf`](https://github.com/OSUGliders/dbd2netcdf)
+First, install some generally useful packages and others that we need for [`dbd2netcdf`](https://github.com/OSUGliders/dbd2netcdf)
 
 ```
 cd ~
-sudo apt install cmake libnetcdf-dev libhdf5-dev build-essential netcdf-bin
+sudo apt install cmake libnetcdf-dev libhdf5-dev build-essential netcdf-bin unzip
 git clone https://github.com/OSUGliders/dbd2netcdf
 cd dbd2netcdf
 # follow the instructions in INSTALL, which were
