@@ -40,12 +40,11 @@ The raw directory should look like this:
 slocum-raw
 ├── 20250204_sl685     # A glider deployment
 │   ├── post-recovery   # Data downloaded after recovery
-│   │   ├── flight      # Organized as on the glider. Contains .[dms][bc]d, .m[cl]g, autoexec.mi, sbdlist.dat, missions, mafiles
-│   │   ├── cache       # .c[ac]c
-│   │   ├── microrider  # .p, .q, .log, .cfg
-│   │   ├── ad2cp       # .ad2cp, .cfg, .log
+│   │   ├── flight      # Copy of flight computer. Contains .[dms][bc]d, .m[cl]g, autoexec.mi, sbdlist.dat, missions, mafiles
+│   │   ├── microrider  # Copy of data/ from microrider. Contains .p, .q, .log, .cfg
+│   │   ├── ad2cp       # Copy of ad2cp data. Contains .ad2cp, .cfg, .log
 │   │   ├── azfp        #
-│   │   └── science     # Organized as on the glider. Contains .[ent][bc]d, .n[cl], .mr[id], proglets.dat, tbdlist.dat, urider.ini, urider.dat
+│   │   └── science     # Copy of science computer. Contains .[ent][bc]d, .n[cl], .mr[id], proglets.dat, tbdlist.dat, urider.ini, urider.dat
 │   └── real-time       # A copy of SFMC directory
 └── 20250919_sl1267    # Another glider deployment
 ```
