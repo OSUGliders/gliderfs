@@ -14,6 +14,8 @@ cd dbd2netcdf
 
 This threw some errors for me on make check and the last part of make install, but does appear to have installed successfully. 
 
+> Global install of glide is not recommended. Independent project environments managed by pixi or uv are preferred.
+
 Next, install [`glide`](https://github.com/OSUGliders/glide) with `pipx`. In future versions of Ubuntu (26.04), this should be much easier. Unfortunately 24.04 only includes pipx version 1.4 which doesn't allow for global installations of packages. To get around this I dug up this comment in an GitHub issue: https://github.com/pypa/pipx/issues/1481#issuecomment-2593233084. Someone backported pipx 1.6 to Ubuntu 24.04 and it seems to work.
 
 ```
@@ -64,7 +66,7 @@ sudo pipx install --global git+https://github.com/mousebrains/q2netcdf
 Install `slocum-tpw`:
 
 ```
-sudo pipx install --global git+https://github.com/mousebrains/q2netcdf
+sudo pipx install --force --global slocum-tpw
 ```
 
 ## Updating dbd2netcdf
@@ -96,3 +98,22 @@ CMake Error at build/cmake_install.cmake:83 (file):
 ```
 
 Most of the parts were successfully installed into `/usr/local/bin/`. I don't think the manifest error is important. 
+
+# Install restic
+
+I manually installed an up-to-date version of restic because ubuntu 24.04 version was old.
+
+```
+cd /tmp
+curl -LO https://github.com/restic/restic/releases/download/v0.19.1/restic_0.19.1_linux_amd64.bz2
+curl -LO https://github.com/restic/restic/releases/download/v0.19.1/SHA256SUMS
+
+grep "restic_${RESTIC_VERSION}_linux_amd64.bz2" SHA256SUMS | sha256sum -c -
+# should print: restic_0.19.1_linux_amd64.bz2: OK
+
+bzip2 -d restic_${RESTIC_VERSION}_linux_amd64.bz2
+chmod +x restic_${RESTIC_VERSION}_linux_amd64
+sudo mv restic_${RESTIC_VERSION}_linux_amd64 /usr/local/bin/restic
+```
+
+
