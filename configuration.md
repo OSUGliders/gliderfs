@@ -49,6 +49,11 @@ sudo curl -fsSL https://pixi.sh/install.sh | PIXI_BIN_DIR=/usr/local/bin PIXI_NO
 
 but then got a permission error and had to move the temporary file, e.g. sudo mv /tmp/tmp.[HASH]/pixi /usr/local/bin/pixi
 
+Install uv for all:
+```
+sudo env UV_INSTALL_DIR="/usr/local/bin" INSTALLER_NO_MODIFY_PATH=1 sh -c "$(curl -LsSf https://astral.sh/uv/install.sh)"
+```
+
 Installing pyturb, our new and experimental microstructure processing software.
 
 ```
