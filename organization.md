@@ -63,7 +63,7 @@ flight/
 
 At the deployment level the processed data should mirror the raw data using the same YYYYMMDD_<NAME & SERIAL> folder convention. Beyond this level data are organized as follows: 
 ```
-glider-proc
+slocum-proc
 ├── 20250204_sl685
 │   ├── software              # Software used to process the deployment
 │   │   └── processing.sh     # Script used to process the data
@@ -90,30 +90,30 @@ This is what a project directory might look like:
 ARCTERX/
 ├── 2022-pilot  # A cruise
 ├── 2023-IOP    # Another cruise
-├── 2025-IOP    # Another cruise
-└── glider      # Processed glider data soft linked from slocum-proc
+└── 2025-IOP
 ```
 
 Within a cruise, standards may vary. Usually, some kind of shared drive is set up on the ship. A useful format to use is:
 
 ```
 2025-IOP/
-├── analysis       # Analysis conducted while at sea, should not be developed further here, but in personal folders
-├── raw            # Raw data and metadata by instrument
+├── analysis       # Analysis conducted while at sea, should not be developed further here
+├── data           # Raw data and metadata by instrument
 │   ├── vmp        # .p
 │   ├── mooring    # by mooring, and instrument
 │   └── bowchain   # by deployment and sensor
 ├── figures        # Interesting analysis results created at sea, should not be developed further here
+├── gliders        # Soft links to glider data
 ├── proc           # Processed data by instrument
 │   ├── vmp
 │   ├── mooring 
 │   └── bowchain 
-├── software       # All the .m, .ipynb, .py, .R code needed to created the processed data. 
+├── code           # All the .m, .ipynb, .py, .R code needed to created the processed data. 
 │   ├── vmp
 │   ├── mooring
 │   └── bowchain
 └── scripts        # Any automatic data shuttling scripts
 ```
 
-It is logical to keep refining the processing code and processed data after the cruise. Prsonal analysis projects should be copied to new locations (e.g. the users home directory). 
+It is logical to keep refining the processing code and processed data after the cruise. Personal analysis projects should be copied to new locations (e.g. the users home directory). 
 
