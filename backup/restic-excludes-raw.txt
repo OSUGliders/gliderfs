@@ -1,0 +1,32 @@
+# Restic exclude file for RAW data trees (slocum-raw, seaglider-raw, ...)
+# Installed to /etc/restic/excludes-raw.txt by install.sh.
+#
+# Deliberately minimal: raw instrument data can contain files whose names
+# look like junk (e.g. slocum-raw/*/science/azfp.tmp), so only OS metadata
+# that can never be instrument data is excluded here, plus version-control
+# metadata (the remote repository is its backup). Do NOT add generic
+# patterns like *.tmp, *~, env or cache.
+#
+# WARNING: slocum-raw/cache/ holds Slocum .cac sensor-list files required to
+# decode dbd/sbd data. Never place a CACHEDIR.TAG in it.
+
+# --- macOS metadata ---
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+.apdisk
+.AppleDouble
+.AppleDB
+
+# --- Version control (backed up by the remote repository) ---
+.git
+.svn
+.hg
+
+# --- Windows metadata ---
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN

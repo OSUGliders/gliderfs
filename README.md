@@ -28,6 +28,10 @@ Good organization of data is critical and is described in separate document: [or
 
 Configuration instructions: [configuration.md](configuration.md)
 
+## Backups
+
+Backup of `grg/` to tier 3 storage: [backup.md](backup.md)
+
 ## Post-recovery processing steps
 
 Steps detailed in: [slocum_post_recovery_workflow.md](slocum_post_recovery_workflow.md)

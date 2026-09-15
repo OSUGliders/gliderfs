@@ -1,0 +1,10 @@
+[Unit]
+Description=Failure notification for %i
+
+[Service]
+Type=oneshot
+# Runs as root so it can read the system journal for the failed unit.
+# Recipients: NOTIFY_EMAIL in /etc/restic/notify.env (edit setup/notify.env,
+# then re-run install.sh). Requires a working `mail` command on this host.
+EnvironmentFile=-/etc/restic/notify.env
+ExecStart=/usr/local/bin/notify-failure.sh %i

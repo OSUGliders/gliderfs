@@ -1,0 +1,83 @@
+# Restic exclude file
+# Patterns without a "/" match the basename at any depth (gitignore-style).
+# Use restic backup --exclude-file=restic-excludes.txt
+#
+# For processed/project trees only. Raw data trees must use
+# restic-excludes-raw.txt: patterns here (*.tmp, .git, env, *~) match real
+# files in slocum-raw.
+
+# --- macOS metadata ---
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+.apdisk
+.AppleDouble
+.AppleDB
+
+# --- Python environments & caches ---
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.venv
+venv
+env
+.env
+.pixi
+.conda
+.mypy_cache
+.pytest_cache
+.tox
+.eggs
+*.egg-info
+.ipynb_checkpoints
+
+# --- Workflow / pipeline run caches ---
+.snakemake
+.nextflow
+.nextflow.log*
+
+# --- Version control ---
+.git
+.svn
+.hg
+
+# --- Editor / office lock, swap, backup files ---
+~$*
+.~lock.*#
+*.swp
+*.swo
+*~
+.#*
+\#*\#
+
+# --- Node / JS ---
+node_modules
+
+# --- Windows ---
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN
+
+# --- R ---
+.Rhistory
+.RData
+.Rproj.user
+
+# --- Generic temp ---
+*.tmp
+*.temp
+
+# NOTE: intentionally NOT excluding "cache" directories by name (e.g.
+# seaglider-proc/*/cache, slocum-proc/cache) since some may hold
+# expensive-to-regenerate intermediates. Instead, tag directories you
+# genuinely want skipped with a CACHEDIR.TAG file and run restic with
+# --exclude-caches (see restic-backup.sh). To tag a directory:
+#
+#   printf 'Signature: 8a477f597d28d172789f06886806bc55\n' > some/cache/dir/CACHEDIR.TAG
+#
+# Never tag slocum-raw/cache: its .cac sensor-list files are needed to
+# decode dbd/sbd data.
