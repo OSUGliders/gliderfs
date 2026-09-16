@@ -200,7 +200,9 @@ for env in /etc/restic/env/*.env; do
     if (( EUID == 0 )); then
         as_svc() { sudo -u "$SERVICE_USER" "$@"; }
         if as_svc test -r "$SOURCE_DIR" -a -x "$SOURCE_DIR"; then pass "$SERVICE_USER can read $SOURCE_DIR"; else fail "$SERVICE_USER cannot read $SOURCE_DIR"; fi
-        unreadable="$(as_svc find "$SOURCE_DIR" \( -type d ! -readable -o -type d ! -executable -o ! -type d ! -readable \) -print -quit 2>/dev/null)"
+        # Symlinks are skipped: -readable follows them, so a dangling link (e.g.
+        # an emacs .#lock) looks unreadable, while restic just stores the link.
+        unreadable="$(as_svc find "$SOURCE_DIR" \( \( ! -type l ! -readable \) -o \( -type d ! -executable \) \) -print -quit 2>/dev/null)"
         if [[ -z "$unreadable" ]]; then pass "$SERVICE_USER can read everything under $SOURCE_DIR"
         else fail "$SERVICE_USER cannot read e.g. $unreadable"; fi
         for d in "$RESTIC_REPOSITORY/data" "$RESTIC_REPOSITORY/locks" "$RESTIC_REPOSITORY/snapshots" "$(dirname "$STATUS_DIR")"; do
