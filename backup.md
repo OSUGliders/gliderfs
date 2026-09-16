@@ -35,11 +35,22 @@ Restore somewhere empty and copy back by hand. Worth testing once in a while.
 
 ## Adding another tree
 
-Copy `slocum-raw.env`, edit the paths, then
+Create the repo as `gliderhelper`, then open it to the `glider_t3` group. restic makes new repos readable only by their owner, so without the `chmod` nobody else can restore from it or run `validate-install.sh`.
+
+```sh
+REPO=/storage/t3/dept/ceoas/grg/backup/<tree>
+mkdir -p "$(dirname "$REPO")"
+sudo -u gliderhelper restic --insecure-no-password --no-cache init --repo "$REPO"
+sudo chmod -R g+rwX "$REPO"
+```
+
+Copy `slocum-raw.env` to `<tree>.env`, set `SOURCE_DIR` and `RESTIC_REPOSITORY`, then
 
 ```sh
 sudo ./install.sh
+sudo systemctl start --no-block restic-backup@<tree>.service   # first backup, don't wait for 02:00
 sudo systemctl enable --now restic-backup@<tree>.timer restic-check@<tree>.timer
+sudo ./validate-install.sh
 ```
 
 Raw trees use `excludes-raw.txt`, which only skips OS junk and version control. Processed trees use `excludes.txt`, which also skips caches and environments. Don't point a raw tree at `excludes.txt`: it drops `*.tmp` and other files that are real instrument data.
