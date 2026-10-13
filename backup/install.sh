@@ -51,6 +51,21 @@ for unit in restic-backup@.service restic-backup@.timer \
     fi
 done
 
+# Per-instance drop-ins (e.g. restic-backup@riot.service.d/user.conf). A new or
+# changed drop-in needs a daemon-reload too, so track it in units_changed.
+for dir in "$SRC"/dropins/*/; do
+    [[ -d "$dir" ]] || continue
+    unit_dir="/etc/systemd/system/$(basename "$dir")"
+    install -d -m 0755 "$unit_dir"
+    for conf in "$dir"*.conf; do
+        [[ -e "$conf" ]] || continue
+        if ! cmp -s "$conf" "$unit_dir/$(basename "$conf")"; then
+            install -m 0644 "$conf" "$unit_dir/"
+            units_changed+=("$(basename "$dir")/$(basename "$conf")")
+        fi
+    done
+done
+
 if (( ${#units_changed[@]} )); then
     step "changed: ${units_changed[*]}"
     step "running systemctl daemon-reload (can take a while)"

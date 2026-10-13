@@ -3,7 +3,7 @@
 # (restic runs with --no-lock) and never starts units.
 #
 #   ./validate-install.sh                 # any user in glider_t3
-#   sudo ./validate-install.sh            # adds checks run as gliderhelper
+#   sudo ./validate-install.sh            # adds checks run as each tree's service user
 #   ./validate-install.sh --tree slocum-raw
 #   ./validate-install.sh --test-email    # also sends a test email to NOTIFY_EMAIL
 #
@@ -12,7 +12,10 @@
 set -uo pipefail
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SERVICE_USER=gliderhelper
+# Default service account. A tree overrides it with SERVICE_USER in <tree>.env
+# (riot runs as cusackje, since gliderhelper is not in the riot group).
+DEFAULT_SERVICE_USER=gliderhelper
+SERVICE_USER="$DEFAULT_SERVICE_USER"
 SERVICE_GROUPS=(glider_t3 glider_group)
 STATUS_DIR=/storage/t3/dept/ceoas/grg/backup/STATUS
 MAX_SNAPSHOT_AGE_H=36
@@ -61,6 +64,13 @@ check_file "$SRC/restic-excludes-raw.txt" /etc/restic/excludes-raw.txt      644
 for unit in restic-backup@.service restic-backup@.timer restic-check@.service \
             restic-check@.timer notify-failure@.service; do
     check_file "$SRC/$unit" "/etc/systemd/system/$unit" 644
+done
+for dir in "$SRC"/dropins/*/; do
+    [[ -d "$dir" ]] || continue
+    for conf in "$dir"*.conf; do
+        [[ -e "$conf" ]] || continue
+        check_file "$conf" "/etc/systemd/system/$(basename "$dir")/$(basename "$conf")" 644
+    done
 done
 for env in "$SRC"/*.env; do
     [[ "$(basename "$env")" == notify.env ]] && continue
@@ -122,11 +132,22 @@ for env in /etc/restic/env/*.env; do
     section "Tree: $tree"
 
     # Load this tree's env file; unset first so values don't leak between trees.
-    unset RESTIC_REPOSITORY SOURCE_DIR BACKUP_TAG EXCLUDE_FILE KEEP_DAILY KEEP_WEEKLY KEEP_MONTHLY KEEP_YEARLY
+    unset RESTIC_REPOSITORY SOURCE_DIR BACKUP_TAG EXCLUDE_FILE SERVICE_USER \
+          KEEP_DAILY KEEP_WEEKLY KEEP_MONTHLY KEEP_YEARLY
     set -a; . "$env"; set +a
     BACKUP_TAG="${BACKUP_TAG:-$(basename "${SOURCE_DIR:-x}")}"
     EXCLUDE_FILE="${EXCLUDE_FILE:-/etc/restic/excludes.txt}"
+    SERVICE_USER="${SERVICE_USER:-$DEFAULT_SERVICE_USER}"
     export RESTIC_CACHE_DIR="${TMPDIR:-/tmp}/validate-restic-cache-$(id -u)"
+
+    # glider_t3 membership is what lets the service user write the repo.
+    if ! id "$SERVICE_USER" >/dev/null 2>&1; then
+        fail "SERVICE_USER $SERVICE_USER does not exist"; continue
+    elif [[ " $(id -nG "$SERVICE_USER") " == *" glider_t3 "* ]]; then
+        pass "runs as $SERVICE_USER (in glider_t3)"
+    else
+        fail "runs as $SERVICE_USER, which is not in glider_t3 (cannot write the repo)"
+    fi
 
     [[ -n "${RESTIC_REPOSITORY:-}" ]] || { fail "RESTIC_REPOSITORY not set in $env"; continue; }
     [[ -n "${SOURCE_DIR:-}" ]]        || { fail "SOURCE_DIR not set in $env"; continue; }
@@ -185,6 +206,18 @@ for env in /etc/restic/env/*.env; do
             failed)     fail "$svc last run failed (result: $result)" ;;
             *)          pass "$svc not failed ($active)" ;;
         esac
+    done
+
+    # A drop-in that systemd has not loaded yet is invisible in the unit's
+    # settings, so compare the effective User with this tree's SERVICE_USER.
+    for kind in backup check; do
+        svc="restic-${kind}@${tree}.service"
+        unit_user="$(systemctl show -p User --value "$svc" 2>/dev/null)"
+        if [[ "${unit_user:-root}" == "$SERVICE_USER" ]]; then
+            pass "$svc runs as $SERVICE_USER"
+        else
+            fail "$svc has User=${unit_user:-root}, expected $SERVICE_USER (sudo systemctl daemon-reload)"
+        fi
     done
 
     # Cache
